@@ -1,0 +1,37 @@
+#
+# Ignore, do not commit, these paths to the repository.
+#
+
+# Node.js
+node_modules/
+coverage/
+.nyc_output/
+
+# Python.
+.venv/
+.pytest_cache/
+.coverage
+
+# Logs.
+logs/
+log/
+*.log
+
+# Pages, reports, etc.
+public/
+docs/
+
+# Artifacts.
+build/
+dist/
+tmp/
+*.tgz
+*.tar.gz
+*.7z
+*.zip
+*.rar
+*.exe
+*.msi
+
+# Misc.
+.DS_Store

@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "cosmos"
+version = "0.0.0"
+description = "Static code analysis. Monorepo of many projects."
+authors = ["Charlie Wilson <wilsoncd35@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+esper = "^3.3"
+pytesseract = "^0.3.13"
+pillow = "^11.0.0"
+wand = "^0.6.13"
+exifread = "^3.0.0"
+python-magic = "^0.4.27"
+pandas = "^2.2.3"
+numpy = "^2.1.3"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+pytest-cov = "^6.0.0"
+pytest-html = "^4.1.1"
+pytest-json-ctrf = "^0.3.5"
+pylint = "^3.3.1"
+
+[tool.pytest.ini_options]
+testpaths = [
+  "extract/test",
+]
+junit_logging = "all"
+junit_log_passing_tests = true
+log_cli = true
+log_cli_level = "INFO"
+log_file = "log/test/unit/test.log"
+norecursedirs = [
+    ".git",
+    ".venv",
+    "build",
+    "dist",
+    "log",
+    "public",
+    "tmp",
+]
+python_files = [
+  "test_*.py",
+]
+addopts = "--html public/report/test/unit/results/index.html --ctrf public/report/test/unit/results/index.json --junitxml public/report/test/unit/results/index.xml --cov-report term --cov-report xml:public/report/test/unit/coverage/index.xml --cov-report html:public/report/test/unit/coverage/html --cov-report json:public/report/test/unit/coverage/index.json --cov-report annotate:public/report/test/unit/coverage/annotate --cov=extract"
