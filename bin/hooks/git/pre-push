@@ -1,0 +1,46 @@
+#!/usr/bin/env sh
+
+#
+desc='pre-push git hook.'
+#
+
+# This bin path.
+  bin_path="$(dirname "$0")"
+  exit_code=0
+
+# Simple logger.
+  log_info() {
+    printf '[info ] %s\n' "$1"
+  }
+
+# Begin info.
+  log_info "Begin: $desc"
+  log_info "bin_path: $bin_path"
+  log_info "CI: $CI"
+
+# End info.
+  end_info() {
+    exit_code="$1"
+
+    [ -z "$exit_code" ] && exit_code=0
+    log_info "exit_code: $exit_code"
+    log_info "End: $desc"
+    return "$exit_code"
+  }
+
+# Get out of here if this is a CI system.
+  if [ -n "$CI" ]; then
+    log_info 'Aborting. CI variable detected. This may be a pipeline so git hooks do not need to be run.'
+    end_info
+  fi
+
+# Do it.
+
+  log_info 'No pre-push hook actions at this time.'
+  # TMP Disable lint js at this time. eslint needs configuration.
+  # npm run lint:js || exit_code=1
+
+# End info.
+  [ "$exit_code" -eq 0 ] || log_error "Failed: $desc"
+
+  end_info "$exit_code"

@@ -1,0 +1,49 @@
+#!/usr/bin/env sh
+
+#
+desc='Install git hooks.'
+#
+
+# This bin path.
+  bin_path="$(dirname "$0")"
+  exit_code=0
+
+# Simple logger.
+  log_info() {
+    printf '[info ] %s\n' "$1"
+  }
+
+# Begin info.
+  log_info "Begin: $desc"
+  log_info "bin_path: $bin_path"
+  log_info "CI: $CI"
+
+# End info.
+  end_info() {
+    exit_code="$1"
+
+    [ -z "$exit_code" ] && exit_code=0
+    log_info "exit_code: $exit_code"
+    log_info "End: $desc"
+    return "$exit_code"
+  }
+
+# Do it.
+  # But not if in a CI system.
+  if [ -z "$CI" ]; then
+    log_info 'CI variable not found. Assuming this is not a CI system. Installing git hooks...'
+
+    if git config core.hooksPath "$bin_path"; then
+      log_info 'Done.'
+    else
+      log_error 'Error.'
+      exit_code=1
+    fi
+  else
+    log_info 'Aborting. CI variable found. This may be a pipeline so git hooks do not need to be installed.'
+  fi
+
+# End info.
+  [ "$exit_code" -eq 0 ] || log_error "Failed: $desc"
+
+  end_info "$exit_code"
