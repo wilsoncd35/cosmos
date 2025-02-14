@@ -1,0 +1,56 @@
+{
+  "users": [
+    {
+      "id": "EkO1jZpqo",
+      "uuid": "d74592b5-c3c6-448b-afe5-c109dde82190",
+      "firstName": "User01",
+      "lastName": "Test",
+      "username": "testUser01",
+      "password": "$2a$10$wMgUkTEiRJ9ayIdtseM4COhQgLm.fxhBBfj/s8am.gJSc0hydB..u",
+      "balance": 0,
+      "createdAt": "2025-02-12T17:36:16.557Z",
+      "modifiedAt": "2025-02-12T17:36:16.557Z"
+    },
+    {
+      "id": "ti3zjscI5",
+      "uuid": "6f27d246-9e5b-4c77-9c4e-981bc1ad23b1",
+      "firstName": "User02",
+      "lastName": "Test",
+      "username": "testUser02",
+      "password": "$2a$10$tsCNY36IJV4F5MbBoJEiyuLkGB7AXE.HIhqrUtuOTjShHBGIoZT5a",
+      "balance": 0,
+      "createdAt": "2025-02-12T17:36:54.824Z",
+      "modifiedAt": "2025-02-12T17:36:54.824Z"
+    }
+  ],
+  "contacts": [],
+  "bankaccounts": [
+    {
+      "id": "CA3I-YgGh",
+      "uuid": "fc57e4a7-dcc8-4231-9f04-bed72be5fa88",
+      "userId": "EkO1jZpqo",
+      "bankName": "Test Bank 01",
+      "accountNumber": "987654321",
+      "routingNumber": "501852312",
+      "isDeleted": false,
+      "createdAt": "2025-02-12T17:37:43.800Z",
+      "modifiedAt": "2025-02-12T17:37:43.800Z"
+    },
+    {
+      "id": "BKlX15VOz",
+      "uuid": "92ce1142-f283-4f4c-ba31-c2ff69059a59",
+      "userId": "ti3zjscI5",
+      "bankName": "Test Bank 01",
+      "accountNumber": "987654322",
+      "routingNumber": "956968094",
+      "isDeleted": false,
+      "createdAt": "2025-02-12T17:38:59.399Z",
+      "modifiedAt": "2025-02-12T17:38:59.399Z"
+    }
+  ],
+  "transactions": [],
+  "likes": [],
+  "comments": [],
+  "notifications": [],
+  "banktransfers": []
+}

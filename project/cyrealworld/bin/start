@@ -1,0 +1,63 @@
+#!/usr/bin/env sh
+
+#
+# Start cyrealworld.
+#
+
+# Exit on any error.
+  set -e
+
+# Config.
+  # This bin path.
+  bin_path="$(dirname "$0")"
+
+  # shellcheck disable=SC2154
+  service_name="$cosmos_service_name"
+  [ -z "$service_name" ] && service_name='cyrealworld001'
+
+  service_path="$(pwd)/tmp"
+
+# Simple logger.
+  log_info() {
+    printf '[info ] %s\n' "$1"
+  }
+
+# Begin info.
+  log_info "Starting $service_name."
+  log_info "service_name: $service_name"
+  log_info "service_path: $service_path"
+  log_info "CI: $CI"
+
+# Do it.
+
+  # nvm if it is available.
+  if [ -s "$HOME"/.nvm/nvm.sh ] && . "$HOME"/.nvm/nvm.sh; then
+    nvm install 20.12.0 || true
+  fi
+
+  mkdir -p "$service_path" || true
+
+  if [ -d "$service_path/$service_name" ]; then
+    log_info "$service_name exists. Clone is not required."
+  else
+    log_info "Cloning $service_name."
+    git clone https://github.com/cypress-io/cypress-realworld-app.git "$service_path/$service_name"
+  fi
+
+  # Seed database with our own, minimal, dataset.
+  rm "$service_path/$service_name"/data/*.json || true
+  cp "$bin_path"/../database.json "$service_path/$service_name"/data/database-seed.json
+
+  # Dependencies.
+  cd "$service_path/$service_name"
+  yarn
+
+  # If Mac with M chip then skip download.
+  # PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true yarn install
+
+  # Start with seeded database.
+  yarn dev
+  # yarn start:empty
+
+# End info.
+  log_info "Stopping $service_name."
