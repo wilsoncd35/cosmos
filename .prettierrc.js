@@ -12,6 +12,8 @@ if (!global.log) global.log = console;
  * @type {import('prettier').Config}
  */
 const config = {
+  plugins: ['prettier-plugin-packagejson', 'prettier-plugin-gherkin'],
+
   arrowParens: 'always',
   bracketSpacing: true,
   endOfLine: 'lf',
