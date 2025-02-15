@@ -41,6 +41,6 @@ desc='pre-push git hook.'
   # npm run lint:js || exit_code=1
 
 # End info.
-  [ "$exit_code" -eq 0 ] || log_error "Failed: $desc"
+  [ "$exit_code" -eq 0 ] || log_info "Failed: $desc"
 
   end_info "$exit_code"

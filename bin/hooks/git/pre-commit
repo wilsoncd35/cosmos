@@ -35,11 +35,11 @@ desc='pre-commit git hook.'
   fi
 
 # Do it.
-  log_info 'TODO No git hooks at this time.'
-
+  # Analysis/lint of staged source files.
+  "$bin_path"/../../../node_modules/.bin/lint-staged || exit_code=1
 
 
 # End info.
-  [ "$exit_code" -eq 0 ] || log_error "Failed: $desc"
+  [ "$exit_code" -eq 0 ] || log_info "Failed: $desc"
 
   end_info "$exit_code"

@@ -2,37 +2,38 @@
  * @module
  */
 
-import globals from 'globals'
-import pluginJs from '@eslint/js'
-import pluginJsdoc from 'eslint-plugin-jsdoc'
-import pluginMocha from 'eslint-plugin-mocha'
-import pluginJson from 'eslint-plugin-json'
-import pluginYml from 'eslint-plugin-yml'
-import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
-
-/** Simple logger. */
-/* istanbul ignore next: Unnecessary. */
-if (!global.log) global.log = console
+import globals from 'globals';
+import pluginJs from '@eslint/js';
+import pluginJsdoc from 'eslint-plugin-jsdoc';
+import pluginMocha from 'eslint-plugin-mocha';
+import pluginJson from 'eslint-plugin-json';
+import pluginYml from 'eslint-plugin-yml';
+import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 const config = [
   {
+    ignores: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/build/**',
+      '**/coverage/**',
+      '**/tmp/**',
+    ],
+  },
+
+  {
+    files: ['**/*.{js,mjs,cjs}'],
+
     languageOptions: {
       globals: {
         ...globals.nodeBuiltin,
         log: true,
       },
     },
-  },
 
-  pluginJs.configs.recommended,
-  pluginJsdoc.configs['flat/recommended'],
-  pluginMocha.configs.flat.recommended,
-  ...pluginYml.configs['flat/standard'],
-  pluginJson.configs.recommended,
-  pluginPrettierRecommended,
-
-  {
     rules: {
+      ...pluginJs.configs.recommended.rules,
+
       'jsdoc/multiline-blocks': [
         'error',
         {
@@ -41,6 +42,17 @@ const config = [
       ],
     },
   },
-]
 
-export { config as default }
+  {
+    files: ['**/*.json'],
+    ...pluginJson.configs.recommended,
+  },
+
+  pluginPrettierRecommended,
+  pluginJsdoc.configs['flat/recommended'],
+  pluginMocha.configs.flat.recommended,
+  ...pluginYml.configs['flat/standard'],
+  ...pluginYml.configs['flat/prettier'],
+];
+
+export { config as default };
