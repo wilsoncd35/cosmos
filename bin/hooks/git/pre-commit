@@ -36,7 +36,7 @@ desc='pre-commit git hook.'
 
 # Do it.
   # Analysis/lint of staged source files.
-  "$bin_path"/../../../node_modules/.bin/lint-staged || exit_code=1
+  npx lint-staged || exit_code=1
 
 
 # End info.
