@@ -36,7 +36,7 @@ junit_logging = "all"
 junit_log_passing_tests = true
 log_cli = true
 log_cli_level = "INFO"
-log_file = "log/test/unit/test.log"
+log_file = "tmp/test/unit/test.log"
 norecursedirs = [
     ".git",
     ".venv",
@@ -49,4 +49,4 @@ norecursedirs = [
 python_files = [
   "test_*.py",
 ]
-addopts = "--html public/report/test/unit/results/index.html --ctrf public/report/test/unit/results/index.json --junitxml public/report/test/unit/results/index.xml --cov-report term --cov-report xml:public/report/test/unit/coverage/index.xml --cov-report html:public/report/test/unit/coverage/html --cov-report json:public/report/test/unit/coverage/index.json --cov-report annotate:public/report/test/unit/coverage/annotate --cov=extract"
+addopts = "--html tmp/test/unit/results/index.html --ctrf tmp/test/unit/results/index.json --junitxml tmp/test/unit/results/index.xml --cov-report term --cov-report xml:tmp/test/unit/coverage/index.xml --cov-report html:tmp/test/unit/coverage/html --cov-report json:tmp/test/unit/coverage/index.json --cov-report annotate:tmp/test/unit/coverage/annotate --cov=extract"
