@@ -1,61 +1,29 @@
-/** Analysis JS, JSON, YAML, etc. configuration.
- * @module
- */
+import eslint from '@eslint/js'
+import tseslint from 'typescript-eslint'
+import playwright from 'eslint-plugin-playwright'
 
-import globals from 'globals'
-import pluginJs from '@eslint/js'
-import pluginJsdoc from 'eslint-plugin-jsdoc'
-import pluginMocha from 'eslint-plugin-mocha'
-import pluginJson from 'eslint-plugin-json'
-import pluginYml from 'eslint-plugin-yml'
-import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
-
-const config = [
+export default tseslint.config(
   {
-    ignores: [
-      '**/.pytest_cache/**',
-      '**/.venv/**',
-      '**/node_modules/**',
-      '**/dist/**',
-      '**/build/**',
-      '**/coverage/**',
-      '**/log/**',
-      '**/tmp/**',
-    ],
+    ignores: ['**/node_modules/**', 'build', 'dist', 'logs', 'tmp', '.venv'],
   },
 
+  eslint.configs.recommended,
+  tseslint.configs.recommended,
+
   {
-    files: ['**/*.{js,mjs,cjs}'],
-
-    languageOptions: {
-      globals: {
-        ...globals.nodeBuiltin,
-        log: true,
-      },
-    },
-
     rules: {
-      ...pluginJs.configs.recommended.rules,
-
-      'jsdoc/multiline-blocks': [
-        'error',
-        {
-          noZeroLineText: false,
-        },
-      ],
+      'no-undef': 'off',
     },
   },
 
   {
-    files: ['**/*.json'],
-    ...pluginJson.configs.recommended,
+    name: 'cosmos/tests',
+    ...playwright.configs['flat/recommended'],
+    files: ['test/e2e/**/*.test.{ts,js}', 'test/e2e/**/*.spec.{ts,js}'],
+    rules: {
+      ...playwright.configs['flat/recommended'].rules,
+
+      'playwright/max-nested-describe': ['error', { max: 35 }],
+    },
   },
-
-  pluginPrettierRecommended,
-  pluginJsdoc.configs['flat/recommended'],
-  pluginMocha.configs.flat.recommended,
-  ...pluginYml.configs['flat/standard'],
-  ...pluginYml.configs['flat/prettier'],
-]
-
-export { config as default }
+)

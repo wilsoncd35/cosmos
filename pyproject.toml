@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "cosmos"
 version = "0.0.0"
-description = "Static code analysis. Monorepo of many projects."
+description = "Scaffolding for projects."
 authors = ["Charlie Wilson <wilsoncd35@gmail.com>"]
 readme = "README.md"
 package-mode = false

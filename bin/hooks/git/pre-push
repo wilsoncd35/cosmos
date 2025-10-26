@@ -5,7 +5,7 @@ desc='pre-push git hook.'
 #
 
 # This bin path.
-  bin_path="$(dirname "$0")"
+  this_path="$(cd "$(dirname "$0")" && pwd)"
   exit_code=0
 
 # Simple logger.
@@ -15,7 +15,7 @@ desc='pre-push git hook.'
 
 # Begin info.
   log_info "Begin: $desc"
-  log_info "bin_path: $bin_path"
+  log_info "this_path: $this_path"
   log_info "CI: $CI"
 
 # End info.
@@ -37,8 +37,6 @@ desc='pre-push git hook.'
 # Do it.
 
   log_info 'No pre-push hook actions at this time.'
-  # TMP Disable lint js at this time. eslint needs configuration.
-  # npm run lint:js || exit_code=1
 
 # End info.
   [ "$exit_code" -eq 0 ] || log_info "Failed: $desc"

@@ -5,7 +5,7 @@ desc='Install git hooks.'
 #
 
 # This bin path.
-  bin_path="$(dirname "$0")"
+  this_path="$(cd "$(dirname "$0")" && pwd)"
   exit_code=0
 
 # Simple logger.
@@ -15,7 +15,7 @@ desc='Install git hooks.'
 
 # Begin info.
   log_info "Begin: $desc"
-  log_info "bin_path: $bin_path"
+  log_info "this_path: $this_path"
   log_info "CI: $CI"
 
 # End info.
@@ -33,10 +33,10 @@ desc='Install git hooks.'
   if [ -z "$CI" ]; then
     log_info 'CI variable not found. Assuming this is not a CI system. Installing git hooks...'
 
-    if git config core.hooksPath "$bin_path"; then
+    if git config core.hooksPath "$this_path"; then
       log_info 'Done.'
     else
-      log_error 'Error.'
+      log_info 'Error.'
       exit_code=1
     fi
   else
@@ -44,6 +44,6 @@ desc='Install git hooks.'
   fi
 
 # End info.
-  [ "$exit_code" -eq 0 ] || log_error "Failed: $desc"
+  [ "$exit_code" -eq 0 ] || log_info "Failed: $desc"
 
   end_info "$exit_code"

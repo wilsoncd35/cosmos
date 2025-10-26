@@ -4,12 +4,16 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
-    "target": "es6",
-    "module": "es2022",
-    "outDir": "dist",
-    "rootDir": ".",
     "allowSyntheticDefaultImports": true,
-    "types": ["node", "cypress"]
+    "allowJs": true,
+    "strict": false,
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "target": "es2024",
+    "types": ["node", "chai", "mocha", "playwright"],
+    "rootDir": "./src",
+    "outDir": "./dist"
   },
-  "include": ["**/*.ts"]
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules"]
 }
