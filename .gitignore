@@ -21,6 +21,11 @@ log/
 public/
 docs/
 
+# Environment.
+.envrc
+.env.*
+# We will allow .env.
+
 # Artifacts.
 build/
 dist/
