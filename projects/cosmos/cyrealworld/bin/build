@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+#
+# Build image.
+#
+
+set -e
+
+# Path to this.
+  this_path="$(cd "$(dirname "$0")" && pwd)"
+
+# Config.
+  image_tag="$1"
+
+  # shellcheck disable=SC2154
+  [ -z "$image_tag" ] && image_tag="$cosmos_config_image_tag"
+  [ -z "$image_tag" ] && image_tag='cyrealworld:latest'
+
+# Do it.
+  cd "$this_path/.."
+
+  docker build --progress plain --tag "$image_tag" .

@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2016
+
+#
+# Build image.
+#
+# Intended to be copied into image build process.
+#
+
+home='/root'
+
+mkdir -p "$home/tmp"
+
+apt update
+apt upgrade -y
+apt install -y --no-install-recommends \
+    bash \
+    ca-certificates \
+    curl \
+    git \
+    jq \
+    make \
+    python3 \
+    tar \
+    yq
+
+# nvm. Node Version Manager.
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+  NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  . "$NVM_DIR/nvm.sh"
+  nvm install 22.15.0
+  echo "node version: $(node --version)"
+  echo "npm version: $(npm --version)"
+
+  npm install --global  \
+    tsx  \
+    typescript \
+    yarn@latest
+
+  echo "tsx version: $(tsx --version)"
+  echo "tsc version: $(tsc --version)"
+
+# cyrealworld.
+  cd "$home" || exit 1
+  git clone https://github.com/cypress-io/cypress-realworld-app.git
+  cd cypress-realworld-app || exit 1
+
+  # Commit as of 2025-10-23.
+  git checkout f3503ce
+
+  # Use our database seed.
+  # rm data/*.json
+  # cp "$home/database-seed.json" data/database-seed.json
+
+  rm -rf .git
+  yarn
+
+# Cleanup.
+  npm cache clean --force
+  yarn cache clean
+
+# shellcheck disable=SC2129
+{
+  echo 'export SHELL=/usr/bin/bash'
+  echo 'export LS_OPTIONS="--color=auto"'
+  echo 'eval "$(dircolors)"'
+  echo 'alias ls="ls $LS_OPTIONS"'
+  echo 'alias ll="ls $LS_OPTIONS -l"'
+  echo 'alias l="ls $LS_OPTIONS -lA"'
+  echo 'alias la="ls $LS_OPTIONS -alh"'
+} >> "$home/.bashrc"
+
+echo 'export PATH="/root/bin:$PATH"' >> "$home/.bashrc"
