@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+this_path="$(cd "$(dirname "$0")" && pwd)"
+
+kind create cluster  \
+  --config "${this_path}/../config.yaml"  \
+  --name lab01  \
+  --wait 5m
