@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+
+set -e
+
+vm_name='podman01'
+
+# Ensure the host path is absolute
+mount_host="$(cd "$(pwd)" && pwd)/tmp/$vm_name"
+
+mkdir -p "$mount_host"
+
+# 1. Initialize the machine without the volume, but with --now to start it.
+podman machine init  \
+  --cpus=4 \
+  --memory=10192 \
+  --disk-size=150 \
+  --volume "$mount_host:/root/data:rw" \
+  --now \
+  "$vm_name"
+
+# 2. Set the volume. This command will automatically stop and restart the VM
+#    to apply the new setting.
+# podman machine set \
+#   --rootful \
+#   --volume "$mount_host:/root/data:rw" \
+#   "$vm_name"
