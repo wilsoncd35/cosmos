@@ -54,4 +54,4 @@ pytest test/api
 
 ## Code Name
 
-Aquaria. A ship from the Battlestar Gallactica universe.
+Aquaria. One of the twelve colonies in the Battlestar Gallactica universe.
