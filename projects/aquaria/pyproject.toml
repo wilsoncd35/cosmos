@@ -1,0 +1,51 @@
+[project]
+name = "aquaria"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Charlie Wilson",email = "wilsoncd35@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "cffi (>=2.0.0,<3.0.0)",
+    "selenium (>=4.38.0,<5.0.0)",
+    "pytest (>=8.4.2,<9.0.0)",
+    "pytest-cov (>=7.0.0,<8.0.0)",
+    "pytest-html (>=4.1.1,<5.0.0)",
+    "pytest-json-ctrf (>=0.3.5,<0.4.0)",
+    "pylint (>=4.0.2,<5.0.0)",
+    "requests (>=2.32.5,<3.0.0)"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{include = "aquaria", from = "src"}]
+
+[tool.pytest.ini_options]
+testpaths = [
+  "test",
+]
+junit_logging = "all"
+junit_log_passing_tests = true
+log_cli = true
+log_cli_level = "INFO"
+log_file = "tmp/logs/pytest.log"
+norecursedirs = [
+    ".git",
+    ".venv",
+    "build",
+    "dist",
+    "log",
+    "logs",
+    "public",
+    "tmp",
+]
+python_files = [
+  "test_*.py",
+  "*_test.py",
+]
+addopts = "--html tmp/test/e2e/results/index.html --ctrf tmp/test/e2e/results/index.json --junitxml tmp/test/e2e/results/index.xml"
