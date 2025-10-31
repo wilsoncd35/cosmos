@@ -1,3 +1,0 @@
-# cosmos
-
-Scaffolding, templates, sandboxes.
