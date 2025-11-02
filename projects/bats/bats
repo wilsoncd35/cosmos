@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+#
+desc='bats runner.'
+#
+
+# Config.
+  this_path="$( cd "$( dirname "$0" )" && pwd )"
+  fail=0
+  exit_code=0
+
+  [[ -z "$cosmos_config_test_report_results_path" ]] && cosmos_config_test_report_results_path='tmp/test/bats/results'
+  [[ -z "$cosmos_config_test_output_path" ]] && cosmos_config_test_output_path='tmp/test/bats/output'
+
+# Simple logger.
+  log_info() {
+    printf "[info ] %s\n" "$1"
+  }
+
+# End info.
+  end_info() {
+    local exit_code="$1"
+
+    [[ -z "$exit_code" ]] && exit_code=0
+
+    log_info "End: $desc"
+    exit "$exit_code"
+  }
+
+# Begin info.
+  log_info "Begin: $desc"
+  log_info "this_path: $this_path"
+  log_info "cosmos_config_test_report_results_path: $cosmos_config_test_report_results_path"
+  log_info "cosmos_config_test_output_path: $cosmos_config_test_output_path"
+  log_info "pwd: $(pwd)"
+  log_info "CI: $CI"
+
+# Tests.
+  if ! command -v bats >/dev/null 2>&1; then
+    log_info 'Aborting. bats is not on PATH.'
+    end_info 1
+  fi
+
+# Do it.
+
+  # These paths must be empty.
+    rm -rf "$cosmos_config_test_report_results_path"
+    mkdir -p "$cosmos_config_test_report_results_path"
+
+    rm -rf "$cosmos_config_test_output_path"
+    mkdir -p "$cosmos_config_test_output_path"
+
+  bats  \
+    --recursive  \
+    --formatter pretty  \
+    --gather-test-outputs-in "$cosmos_config_test_output_path"  \
+    --print-output-on-failure  \
+    --show-output-of-passing-tests  \
+    --report-formatter tap13  \
+    --output "$cosmos_config_test_report_results_path"  \
+    "$@" || exit_code="$?"
+
+  # Make a copy of results.
+  now=$(date +%Y%m%d%H%M%S)
+  cp -r "$cosmos_config_test_report_results_path" "${cosmos_config_test_report_results_path}-$now"
+  cp -r "$cosmos_config_test_output_path" "${cosmos_config_test_output_path}-$now"
+
+# End info.
+  end_info "$exit_code"
