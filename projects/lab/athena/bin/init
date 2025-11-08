@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+set -e
+
+# This path.
+  this_path="$(cd "$(dirname "$0")" && pwd)"
+
+# Environment.
+  . "${this_path}/../.env"
+
+# Volumes.
+  mkdir -p "${this_path}/../airflow/{config,dags,logs,plugins}"
+
+# Optional. Create the initial airflow/config/airflow.cfg.
+  # docker compose run airflow-cli airflow config list
+
+# Init the database.
+  docker compose up airflow-init
+
+# Do it.
+  docker compose up

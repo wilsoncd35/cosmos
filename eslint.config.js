@@ -4,7 +4,14 @@ import playwright from 'eslint-plugin-playwright'
 
 export default tseslint.config(
   {
-    ignores: ['**/node_modules/**', 'build', 'dist', 'logs', 'tmp', '**/.venv'],
+    ignores: [
+      '**/node_modules/**',
+      'build',
+      'dist',
+      'logs',
+      '**/tmp**',
+      '**/.venv',
+    ],
   },
 
   eslint.configs.recommended,
