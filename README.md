@@ -13,3 +13,7 @@ Scaffolding for projects. A monorepo.
 - [caprica](projects/caprica/README.md)
 
   Scaffolding for unit, integration, e2e testing with mocha, Cypress, nyc/istanbul, etc.
+
+- [scorpria](projects/scorpia/README.md)
+
+  Scaffolding for e2e testing with Playwright.

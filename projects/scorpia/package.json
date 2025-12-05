@@ -1,0 +1,26 @@
+{
+  "name": "scorpia",
+  "version": "0.1.0-0",
+  "private": true,
+  "description": "Scaffolding for e2e testing with playwright.",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Charlie Wilson <wilsoncd35@gmail.com> (https://github.com/wilsoncd35)",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npx playwright install",
+    "test": "npm run test:e2e",
+    "test:e2e": "npx playwright test --project todomvc"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.10.1",
+    "globals": "^16.5.0",
+    "prettier": "^3.7.4",
+    "prettier-plugin-packagejson": "^2.5.20",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

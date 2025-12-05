@@ -26,6 +26,15 @@ const config = {
   tabWidth: 2,
   trailingComma: 'all',
   useTabs: false,
+
+  overrides: [
+    {
+      files: 'projects/scorpia/src/test/e2e/**/*.test.ts',
+      options: {
+        printWidth: 600,
+      },
+    },
+  ],
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
