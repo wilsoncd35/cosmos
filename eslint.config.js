@@ -33,4 +33,12 @@ export default tseslint.config(
       'playwright/max-nested-describe': ['error', { max: 35 }],
     },
   },
+
+  {
+    name: 'caprica',
+    files: ['projects/caprica/**/*.{ts,js}'],
+    rules: {
+      '@typescript-eslint/no-unused-expressions': 'off',
+    },
+  },
 )
