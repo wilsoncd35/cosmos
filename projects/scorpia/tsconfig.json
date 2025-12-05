@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "strict": false,
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "target": "es2024",
+    "types": ["node", "chai", "mocha", "playwright"],
+    "rootDir": "./src",
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "projects/caprica"]
+}
