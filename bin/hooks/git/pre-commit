@@ -35,13 +35,13 @@ desc='pre-commit git hook.'
   fi
 
 # Do it.
-  log_info 'Begin analysis lint js.'
+  log_info 'Begin analysis lint mjs,cjs,js,json,yml,yaml,ts,tsx,md.'
   npx eslint . || exit_code=1
-  log_info 'End analysis lint js.'
+  log_info 'End analysis lint mjs,cjs,js,json,yml,yaml,ts,tsx,md.'
 
-  log_info 'Begin analysis format js.'
+  log_info 'Begin analysis format mjs,cjs,js,json,yml,yaml,ts,tsx,md.'
   npx prettier --check "**/*.{mjs,cjs,js,json,yml,yaml,ts,tsx,md}" || exit_code=1
-  log_info 'End analysis format js.'
+  log_info 'End analysis format mjs,cjs,js,json,yml,yaml,ts,tsx,md.'
 
 # End info.
   [ "$exit_code" -eq 0 ] || log_info "Failed: $desc"

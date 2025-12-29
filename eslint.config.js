@@ -2,6 +2,7 @@ import eslint from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import playwright from 'eslint-plugin-playwright'
 import mocha from 'eslint-plugin-mocha'
+import json from 'eslint-plugin-json'
 
 export default tseslint.config(
   {
@@ -52,5 +53,10 @@ export default tseslint.config(
       ...mocha.configs.recommended.rules,
       'mocha/no-mocha-arrows': 'error',
     },
+  },
+
+  {
+    files: ['**/*.json'],
+    ...json.configs['recommended'],
   },
 )
