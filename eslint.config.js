@@ -3,6 +3,7 @@ import tseslint from 'typescript-eslint'
 import playwright from 'eslint-plugin-playwright'
 import mocha from 'eslint-plugin-mocha'
 import json from 'eslint-plugin-json'
+import jsdoc from 'eslint-plugin-jsdoc'
 
 export default tseslint.config(
   {
@@ -18,10 +19,17 @@ export default tseslint.config(
 
   eslint.configs.recommended,
   tseslint.configs.recommended,
+  jsdoc.configs['flat/recommended'],
   mocha.configs.recommended,
 
   {
+    files: ['**/*.{js,ts,mjs,cjs}'],
+    plugins: {
+      jsdoc,
+    },
+
     rules: {
+      'jsdoc/multiline-blocks': ['error', { noZeroLineText: false }],
       'no-undef': 'off',
     },
   },
