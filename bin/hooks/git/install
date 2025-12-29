@@ -41,6 +41,7 @@ desc='Install git hooks.'
     fi
   else
     log_info 'Aborting. CI variable found. This may be a pipeline so git hooks do not need to be installed.'
+    exit 0
   fi
 
 # End info.
