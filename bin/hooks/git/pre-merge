@@ -31,7 +31,7 @@ desc='pre-merge git hook.'
 # Get out of here if this is a CI system.
   if [ -n "$CI" ]; then
     log_info 'Aborting. CI variable detected. This may be a pipeline so git hooks do not need to be run.'
-    end_info
+    exit 0
   fi
 
 # Do it.

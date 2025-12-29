@@ -17,7 +17,6 @@ const config = {
   arrowParens: 'always',
   bracketSpacing: true,
   endOfLine: 'lf',
-  jsxBracketSameLine: true,
   printWidth: 80,
   proseWrap: 'never',
   quoteProps: 'as-needed',

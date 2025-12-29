@@ -1,6 +1,7 @@
 import eslint from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import playwright from 'eslint-plugin-playwright'
+import mocha from 'eslint-plugin-mocha'
 
 export default tseslint.config(
   {
@@ -16,6 +17,7 @@ export default tseslint.config(
 
   eslint.configs.recommended,
   tseslint.configs.recommended,
+  mocha.configs.recommended,
 
   {
     rules: {
@@ -24,7 +26,7 @@ export default tseslint.config(
   },
 
   {
-    name: 'cosmos/tests',
+    name: 'e2e tests',
     ...playwright.configs['flat/recommended'],
     files: ['test/e2e/**/*.test.{ts,js}', 'test/e2e/**/*.spec.{ts,js}'],
     rules: {
@@ -39,6 +41,16 @@ export default tseslint.config(
     files: ['projects/caprica/**/*.{ts,js}'],
     rules: {
       '@typescript-eslint/no-unused-expressions': 'off',
+    },
+  },
+
+  {
+    name: 'mocha tests',
+    files: ['test/**/*.test.{ts,js}', 'test/**/*.spec.{ts,js}'],
+    ignores: ['test/e2e/**'],
+    rules: {
+      ...mocha.configs.recommended.rules,
+      'mocha/no-mocha-arrows': 'error',
     },
   },
 )

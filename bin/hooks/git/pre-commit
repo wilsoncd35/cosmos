@@ -31,13 +31,17 @@ desc='pre-commit git hook.'
 # Get out of here if this is a CI system.
   if [ -n "$CI" ]; then
     log_info 'Aborting. CI variable detected. This may be a pipeline so git hooks do not need to be run.'
-    end_info
+    exit 0
   fi
 
 # Do it.
-  # Analysis/lint of staged source files.
-  npx lint-staged || exit_code=1
+  log_info 'Begin analysis lint js.'
+  npx eslint . || exit_code=1
+  log_info 'End analysis lint js.'
 
+  log_info 'Begin analysis format js.'
+  npx prettier --check "**/*.{mjs,cjs,js,json,yml,yaml,ts,tsx,md}" || exit_code=1
+  log_info 'End analysis format js.'
 
 # End info.
   [ "$exit_code" -eq 0 ] || log_info "Failed: $desc"
