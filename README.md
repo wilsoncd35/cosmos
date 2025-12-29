@@ -1,6 +1,6 @@
 # cosmos
 
-Scaffolding for projects. A monorepo.
+Dev, ops, knowledge, and scaffolding that I often use. A monorepo.
 
 - [aquaria](projects/aquaria/README.md)
 
@@ -13,6 +13,10 @@ Scaffolding for projects. A monorepo.
 - [caprica](projects/caprica/README.md)
 
   Scaffolding for unit, integration, e2e testing with mocha, Cypress, nyc/istanbul, etc.
+
+- [loggersh](projects/loggersh/README.md)
+
+  Simple shell logger.
 
 - [scorpria](projects/scorpia/README.md)
 

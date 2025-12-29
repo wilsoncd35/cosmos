@@ -1,0 +1,3 @@
+# loggersh
+
+Simple shell logger.
